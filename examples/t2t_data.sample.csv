@@ -1,0 +1,6 @@
+split,src,tgt
+train,This is a test sentence.,これはテスト文です。
+train,The model translates source text into target text.,モデルは原文を目標言語に翻訳します。
+train,We evaluate translation quality and latency.,翻訳品質と遅延を評価します。
+dev,Simultaneous translation requires balancing accuracy and delay.,同時翻訳では、正確性と遅延のバランスを取る必要があります。
+dev,The system selects actions based on the current input context.,システムは現在の入力文脈に基づいて行動を選択します。

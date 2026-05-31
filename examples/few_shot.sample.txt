@@ -1,0 +1,11 @@
+Example 1:
+Source: This is a test sentence.
+Target: これはテスト文です。
+
+Example 2:
+Source: The model translates source text into target text.
+Target: モデルは原文を目標言語に翻訳します。
+
+Example 3:
+Source: Simultaneous translation requires balancing accuracy and delay.
+Target: 同時翻訳では、正確性と遅延のバランスを取る必要があります。

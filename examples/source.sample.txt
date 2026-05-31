@@ -1,0 +1,5 @@
+This is a test sentence.
+The model translates source text into target text.
+We evaluate translation quality and latency.
+Simultaneous translation requires balancing accuracy and delay.
+The system selects actions based on the current input context.
