@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Action-based Simultaneous Machine Translation</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      color: #1f2937;
+      background: #f8fafc;
+      line-height: 1.6;
+    }
+    header {
+      background: #0f172a;
+      color: white;
+      padding: 56px 24px;
+      text-align: center;
+    }
+    header h1 {
+      max-width: 980px;
+      margin: 0 auto 16px;
+      font-size: 2.2rem;
+      line-height: 1.25;
+    }
+    header p {
+      max-width: 820px;
+      margin: 0 auto;
+      color: #cbd5e1;
+      font-size: 1.05rem;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 36px 24px 64px;
+    }
+    section {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    }
+    h2 {
+      margin-top: 0;
+      color: #0f172a;
+    }
+    .links a {
+      display: inline-block;
+      margin: 8px 10px 8px 0;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: #1d4ed8;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .links a.secondary {
+      background: #334155;
+    }
+    .pipeline {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: #f1f5f9;
+      padding: 14px;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+    footer {
+      text-align: center;
+      color: #64748b;
+      padding: 28px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Action-based Simultaneous Machine Translation</h1>
+    <p>
+      A research toolkit for action-based simultaneous machine translation,
+      supervised seq2seq fine-tuning, few-shot LLM translation, and
+      latency-aware text-to-speech synthesis.
+    </p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Overview</h2>
+      <p>
+        This project explores simultaneous machine translation from an
+        action-based perspective. The repository includes scripts for preparing
+        text-to-text data, fine-tuning mBART-style sequence-to-sequence models,
+        running prompt-based LLM translation, and synthesizing latency-aware
+        speech outputs.
+      </p>
+    </section>
+
+    <section>
+      <h2>Repository</h2>
+      <p>
+        The codebase contains three main parts:
+      </p>
+      <ul>
+        <li><strong>Supervised fine-tuning:</strong> data preparation, mBART-style training, and seq2seq inference.</li>
+        <li><strong>Few-shot LLM translation:</strong> prompt-based translation with causal language models.</li>
+        <li><strong>Latency-aware TTS:</strong> alignment, WAIT insertion, time-table construction, and TTS synthesis.</li>
+      </ul>
+      <div class="links">
+        <a href="https://github.com/Cadente1/Action-based-Simultaneous-Machine-Translation">Code</a>
+        <a class="secondary" href="https://arxiv.org/abs/2601.11002">arXiv</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Pipeline</h2>
+      <div class="pipeline">
+        Translation modeling: prepare_t2t_csv.py → train_seq2seq.py → infer_seq2seq.py<br>
+        Few-shot translation: infer_llm_translation.py<br>
+        Latency-aware TTS: alignment.py → wait_insertion.py → time_table.py → tts.py
+      </div>
+    </section>
+
+    <section>
+      <h2>Citation</h2>
+      <pre><code>@misc{zhang2026redefining,
+  title         = {Redefining Machine Simultaneous Interpretation: From Incremental Translation to Human-Like Strategies},
+  author        = {Zhang, Qianen and Yang, Zeyu and Nakamura, Satoshi},
+  year          = {2026},
+  eprint        = {2601.11002},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2601.11002}
+}</code></pre>
+    </section>
+  </main>
+
+  <footer>
+    Action-based Simultaneous Machine Translation
+  </footer>
+</body>
+</html>
