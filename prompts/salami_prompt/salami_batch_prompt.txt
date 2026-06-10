@@ -1,0 +1,13 @@
+Instructions:
+The Salami Technique in simultaneous interpretation breaks the source input into
+smaller, manageable segments, where each segment contains enough information to
+be interpreted accurately.
+
+1. Segment the following sentence into shorter units suitable for simultaneous interpretation.
+2. Translate each segment into {target_language}.
+3. Connect the translated segments into a fluent final translation.
+
+Input:
+{text}
+
+Output:

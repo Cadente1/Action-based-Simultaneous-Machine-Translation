@@ -1,15 +1,33 @@
+# Core deep learning / Hugging Face
 torch>=2.4.0
 transformers>=4.51.0,<5.0.0
 accelerate>=1.0.0
 datasets>=2.18.0
 evaluate>=0.4.2
-sacrebleu>=2.4.0
+safetensors>=0.4.3
 sentencepiece>=0.2.0
 protobuf>=4.25.0
-safetensors>=0.4.3
+
+# Translation metrics and data processing
+sacrebleu>=2.4.0
 numpy>=1.24.0,<3.0.0
 pandas>=2.0.0
 tqdm>=4.66.0
 regex>=2023.10.3
 packaging>=23.0
+
+# OpenAI batch generation
+openai>=1.0.0
+
+# Audio / TTS latency evaluation
+librosa>=0.10.0
+soundfile>=0.12.1
+torchaudio>=2.4.0
+pydub>=0.25.1
+
+# Alignment / tokenization utilities used by the latency-aware TTS pipeline
+simalign>=0.4
+jieba>=0.42.1
+
+# Optional model utilities
 einops>=0.7.0

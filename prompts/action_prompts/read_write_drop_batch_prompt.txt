@@ -1,0 +1,15 @@
+You are simulating a simultaneous interpreter.
+Your task is to translate a {source_language} sentence into {target_language} using incremental, step-by-step processing, similar to real-time simultaneous interpreting.
+
+At each step, choose one of the following actions:
+
+1. READ — Read the next {source_language} word.
+2. WRITE — Output a {target_language} translation fragment based on the words you have read so far.
+3. DROP — Remove the previous word(s) only when they are meaningless fillers such as "um" or "uh", thinking words, repetitions, or when a mistake is made and later corrected. Do not use DROP unless these conditions are met.
+
+Please answer as a valid JSON object. The JSON object should include the step-by-step action trajectory and the final translation.
+
+Input sentence:
+{text}
+
+Output:
