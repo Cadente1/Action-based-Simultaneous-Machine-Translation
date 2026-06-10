@@ -24,7 +24,7 @@ aligner = SentenceAligner(model="", token_type="", matching_methods="")
 # === Limiting condition ===
 PRONOUNS = {"it", "he", "she", "they", "we", "i", "you"}
 
-# === 对齐处理 ===
+# === Alignment ===
 with open(output_path, "w", encoding="utf-8") as fout:
     for en, zh in tqdm(zip(en_lines, zh_lines), total=len(en_lines), desc="Aligning"):
         en_tokens = en.strip().split()
