@@ -14,7 +14,7 @@ PRONOMINALIZATION / PRONOUN
 The repository follows the main project workflow:
 
 1. define action and Salami prompt templates;
-2. generate action-specific translations through GPT batch requests;
+2. generate action-specific translations through GPT batch requests or local Qwen action-prompt inference;
 3. fine-tune or run translation models under different supervision settings;
 4. evaluate translation quality and latency;
 5. synthesize latency-aware speech outputs for TTS-based LAAL analysis.
@@ -72,21 +72,30 @@ However, human interpreters use richer strategies under latency pressure. They m
 │   └── t2t_data.sample.csv
 ├── prompts/
 │   ├── action_prompts/
+│   │   ├── README.md
+│   │   ├── full_actions_batch_prompt.txt
+│   │   ├── read_write_drop_batch_prompt.txt
+│   │   ├── stepwise_action_prompt.txt
+│   │   └── system_prompt.txt
 │   └── salami_prompt/
+│       ├── README.md
+│       └── salami_batch_prompt.txt
 └── scripts/
-    ├── few_shot/
-    │   └── few_shot_prompt.py
     ├── gpt_batch/
     │   ├── create_action_batch_jsonl.py
     │   ├── create_batch_jsonl.py
     │   ├── upload_batch_jsonl.py
     │   └── compute_text_metrics.py
-    ├── Latency_aware_TTS/
+    ├── latency_aware_TTS/
     │   ├── alignment.py
     │   ├── wait_insertion.py
     │   ├── time_table.py
     │   ├── tts.py
     │   └── compute_tts_laal.py
+    ├── llm_inference/
+    │   ├── README.md
+    │   ├── action_prompt_inference.py
+    │   └── few_shot_prompt.py
     └── supervised_FT/
         ├── prepare_csv.py
         ├── train_t2t_mbart.py
@@ -178,7 +187,7 @@ prompts/
 └── salami_prompt/
 ```
 
-The prompts are kept outside Python scripts so that the same definitions can be reused in both offline GPT batch generation and online step-wise inference.
+The prompts are kept outside Python scripts so that the same definitions can be reused in both offline GPT batch generation and online/local action-prompt inference.
 
 ### Action prompts
 
@@ -327,20 +336,58 @@ For models that do not require language codes, omit `--src_lang` and `--tgt_lang
 
 ---
 
-## Track B: decoder-only LLM adaptation
+## Track B: decoder-only LLM inference
+
+Decoder-only LLM scripts are stored in:
+
+```text
+scripts/llm_inference/
+```
 
 This track studies how decoder-only LLMs can be prompted or adapted to make action-aware translation decisions.
 
-The few-shot script is stored in:
+### Action-prompt inference
 
-```text
-scripts/few_shot/few_shot_prompt.py
-```
+`action_prompt_inference.py` is the main local inference script for Qwen-style causal language models, such as Qwen3-8B. It uses the action policy prompt, performs line-by-line inference, supports incremental writing, and can resume from an existing output file.
 
 Example usage:
 
 ```bash
-python scripts/few_shot/few_shot_prompt.py \
+python scripts/llm_inference/action_prompt_inference.py \
+  --model_name_or_path Qwen/Qwen3-8B \
+  --source_file examples/source.sample.txt \
+  --output_file outputs/sample.qwen3.action.ja.txt \
+  --source_language English \
+  --target_language Japanese \
+  --trust_remote_code \
+  --resume
+```
+
+For local models, replace `Qwen/Qwen3-8B` with your local model path.
+
+To use an external prompt template:
+
+```bash
+python scripts/llm_inference/action_prompt_inference.py \
+  --model_name_or_path Qwen/Qwen3-8B \
+  --source_file data/dev.en.txt \
+  --output_file outputs/dev.action.zh.txt \
+  --source_language English \
+  --target_language Chinese \
+  --system_prompt_file prompts/action_prompts/system_prompt.txt \
+  --user_prompt_file prompts/action_prompts/full_actions_batch_prompt.txt \
+  --trust_remote_code \
+  --resume
+```
+
+If the prompt file is originally designed for batch generation and asks for JSON/action trajectories, create a separate prompt template for final-translation inference before using it here.
+
+### Few-shot baseline
+
+`few_shot_prompt.py` is kept as a simpler few-shot prompting baseline.
+
+```bash
+python scripts/llm_inference/few_shot_prompt.py \
   --model_name_or_path Qwen/Qwen3-8B \
   --source_file examples/source.sample.txt \
   --output_file outputs/sample.llm.pred.txt \
@@ -348,8 +395,6 @@ python scripts/few_shot/few_shot_prompt.py \
   --target_lang Japanese \
   --few_shot_file examples/few_shot.sample.txt
 ```
-
-For local models, replace `Qwen/Qwen3-8B` with your local model path.
 
 ### TransLLaMA fine-tuning
 
@@ -361,6 +406,7 @@ This repository provides the surrounding resources for that track:
 action prompt templates
 Salami prompt templates
 batch generation scripts
+local Qwen action-prompt inference
 example data formats
 quality and latency evaluation scripts
 ```
@@ -399,13 +445,13 @@ For Japanese or German, change the tokenizer setting as needed:
 `compute_tts_laal.py` is stored in:
 
 ```text
-scripts/Latency_aware_TTS/compute_tts_laal.py
+scripts/latency_aware_TTS/compute_tts_laal.py
 ```
 
 It computes seconds-based latency metrics from target speech and source-side word timestamps.
 
 ```bash
-python scripts/Latency_aware_TTS/compute_tts_laal.py \
+python scripts/latency_aware_TTS/compute_tts_laal.py \
   --translation_file outputs/drop.zh.txt \
   --audio_dir outputs/drop_tts/sentences \
   --source_timestamps_jsonl data/en_word_timestamps_dev.jsonl \
@@ -441,7 +487,7 @@ add:
 The latency-aware TTS pipeline is stored in:
 
 ```text
-scripts/Latency_aware_TTS/
+scripts/latency_aware_TTS/
 ```
 
 It converts segmented or action-based translations into latency-aware speech through four steps:
@@ -460,7 +506,7 @@ alignment.py → wait_insertion.py → time_table.py → tts.py
 Example workflow:
 
 ```bash
-cd scripts/Latency_aware_TTS
+cd scripts/latency_aware_TTS
 
 python alignment.py
 python wait_insertion.py
@@ -480,17 +526,11 @@ segment_timetable.jsonl
 
 The final output is synthesized audio, usually saved as `.wav` files under the configured output directory.
 
-For detailed input formats, timestamp requirements, and CosyVoice setup notes, see:
-
-```text
-scripts/Latency_aware_TTS/README.md
-```
-
 ---
 
 ## Suggested workflows
 
-### Action-based translation generation
+### Action-based GPT batch generation
 
 ```bash
 # 1. Create action-aware JSONL requests
@@ -517,6 +557,19 @@ python scripts/gpt_batch/compute_text_metrics.py \
   --reference_file data/dev.zh.txt \
   --output_json outputs/full_actions_text_metrics.json \
   --tokenize zh
+```
+
+### Local Qwen action-prompt inference
+
+```bash
+python scripts/llm_inference/action_prompt_inference.py \
+  --model_name_or_path Qwen/Qwen3-8B \
+  --source_file data/dev.en.txt \
+  --output_file outputs/dev.qwen3.action.zh.txt \
+  --source_language English \
+  --target_language Chinese \
+  --trust_remote_code \
+  --resume
 ```
 
 ### Supervised fine-tuning with generated targets
@@ -549,7 +602,7 @@ python scripts/supervised_FT/inference.py \
 ### TTS-based latency evaluation
 
 ```bash
-python scripts/Latency_aware_TTS/compute_tts_laal.py \
+python scripts/latency_aware_TTS/compute_tts_laal.py \
   --translation_file outputs/test.action_zh.pred.txt \
   --audio_dir outputs/test_action_zh_tts/sentences \
   --source_timestamps_jsonl data/en_word_timestamps_test.jsonl \
@@ -610,9 +663,11 @@ These directories should generally be excluded from Git tracking.
 - Do not commit API keys, large datasets, checkpoints, generated audio, or private evaluation files.
 - For mBART50, use valid language codes such as `en_XX`, `zh_CN`, `ja_XX`, or `de_DE`.
 - For OpenAI batch outputs, align results using `custom_id`; do not assume the output order is identical to the input order.
+- For Qwen-style local inference, make sure the model supports chat templates through `tokenizer.apply_chat_template`.
 - For source-side timestamps, prepare word-level timestamp JSONL files using Whisper, WhisperX, or another compatible tool.
 - For TTS synthesis, install and configure CosyVoice separately.
 - For TransLLaMA fine-tuning, use the official implementation and adapt the language and data configuration for the target experiment.
+- On case-sensitive systems, make sure the directory name `scripts/latency_aware_TTS/` matches the path used in the commands.
 
 ---
 
