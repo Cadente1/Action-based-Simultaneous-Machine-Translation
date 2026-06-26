@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Action Examples</title>
+  <style>
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --navy: #0f172a;
+  --blue: #2563eb;
+  --cyan: #0891b2;
+  --green: #16a34a;
+  --orange: #ea580c;
+  --purple: #7c3aed;
+  --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+  --radius: 18px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 32rem),
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.10), transparent 28rem),
+    var(--bg);
+  line-height: 1.65;
+}
+a { color: var(--blue); }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(16px);
+  background: rgba(248, 250, 252, 0.84);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+}
+.topbar-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 12px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.brand {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+  white-space: nowrap;
+}
+.nav {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  font-size: 0.94rem;
+}
+.nav a {
+  color: #334155;
+  text-decoration: none;
+  font-weight: 600;
+}
+.nav a:hover { color: var(--blue); }
+.hero {
+  color: white;
+  background:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 64, 175, 0.92)),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.40), transparent 28rem);
+  padding: 58px 24px 48px;
+}
+.hero-inner { max-width: 1160px; margin: 0 auto; }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #dbeafe;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+h1 {
+  margin: 0;
+  font-size: clamp(2.1rem, 4vw, 3.9rem);
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+}
+.subtitle {
+  max-width: 900px;
+  margin: 18px 0 0;
+  font-size: clamp(1.02rem, 2vw, 1.22rem);
+  color: #dbeafe;
+  line-height: 1.55;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border-radius: 11px;
+  text-decoration: none;
+  font-weight: 800;
+  border: 1px solid transparent;
+}
+.btn.primary { background: white; color: #1e3a8a; }
+.btn.secondary { background: rgba(255, 255, 255, 0.10); color: white; border-color: rgba(255, 255, 255, 0.25); }
+main {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 38px 22px 74px;
+}
+section { margin-bottom: 28px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 30px;
+}
+h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: clamp(1.48rem, 2.8vw, 2.05rem);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+h3 {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-size: 1.13rem;
+  line-height: 1.3;
+}
+.lead {
+  margin: 12px 0 0;
+  color: #475569;
+  font-size: 1.04rem;
+  max-width: 920px;
+}
+.muted { color: var(--muted); }
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+.example-card, .prompt-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  background: #ffffff;
+}
+.example-card { background: #f8fafc; }
+.lang-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.lang-box {
+  border: 1px solid #dbeafe;
+  background: #f8fbff;
+  border-radius: 14px;
+  padding: 14px;
+}
+.label {
+  display: inline-block;
+  font-weight: 900;
+  color: var(--navy);
+  margin-right: 8px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-weight: 800;
+  font-size: 0.82rem;
+  border: 1px solid transparent;
+}
+.tag.gray { color: #475569; background: #e2e8f0; border-color: #cbd5e1; }
+.tag.orange { color: #c2410c; background: #ffedd5; border-color: #fed7aa; }
+.tag.purple { color: #6d28d9; background: #ede9fe; border-color: #ddd6fe; }
+.tag.green { color: #15803d; background: #dcfce7; border-color: #bbf7d0; }
+.tag.blue { color: #1d4ed8; background: #dbeafe; border-color: #bfdbfe; }
+pre {
+  margin: 14px 0 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border-radius: 16px;
+  padding: 18px;
+  background: #0f172a;
+  color: #e2e8f0;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+footer {
+  padding: 34px 22px;
+  text-align: center;
+  color: #64748b;
+  border-top: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.72);
+}
+@media (max-width: 900px) {
+  .grid-2, .lang-grid { grid-template-columns: 1fr; }
+  .nav { display: none; }
+}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Action-based SiMT</div>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#actions">Actions</a>
+        <a href="index.html#framework">Framework</a>
+        <a href="index.html#results">Results</a>
+        <a href="prompt_examples.html">Prompt examples</a>
+      </nav>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Project Examples</div>
+      <h1>Action Examples</h1>
+      <p class="subtitle">Concrete English–German and English–Chinese examples for Sentence_Cut, Drop, Partial_Summarization, and Pronominalization.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="index.html">Back to project page</a>
+        <a class="btn secondary" href="https://github.com/Cadente1/Action-based-Simultaneous-Machine-Translation">Code</a>
+        <a class="btn secondary" href="https://arxiv.org/abs/2601.11002">Paper</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="card">
+      <h2>Action examples from the appendix</h2>
+      <p class="lead">
+        These examples illustrate how each proposed action changes the target output while preserving the intended meaning under simultaneous-interpretation constraints.
+      </p>
+      <div class="tag-row">
+        <span class="tag orange">Sentence_Cut</span>
+        <span class="tag gray">Drop</span>
+        <span class="tag purple">Partial_Summarization</span>
+        <span class="tag green">Pronominalization</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="tag-row"><span class="tag orange">Sentence_Cut</span></div>
+      <h2 style="margin-top: 10px;">Sentence_Cut</h2>
+      <p class="lead">Splits a long structure into shorter units while preserving the core meaning.</p>
+      <div class="example-card" style="margin-top: 18px;">
+        <p><span class="label">Source:</span>At the pool party with Barack Obama, we got a graph with the right nodes on the person and the event subject, but guessed the timing information wrong.</p>
+        <div class="lang-grid">
+          <div class="lang-box">
+            <h3>English → German</h3>
+            <p><span class="label">Reference:</span>Bei der Poolparty mit Barack Obama bekamen wir einen mit den richtigen Knoten zur Person und zum Ereignisthema versehenen Graphen, schätzten die zeitlichen Informationen aber falsch ein.</p>
+            <p><span class="label">Sentence_Cut:</span>Bei der Poolparty mit Barack Obama bekamen wir einen Graphen. Er hatte die richtigen Knoten zur Person und zum Ereignisthema, aber wir schätzten die zeitlichen Informationen falsch ein.</p>
+          </div>
+          <div class="lang-box">
+            <h3>English → Chinese</h3>
+            <p><span class="label">Reference:</span>在与Barack Obama的泳池派对上，我们得到了一张关于人物和事件主题正确节点的图表，但猜错了时间信息。</p>
+            <p><span class="label">Sentence_Cut:</span>在与Barack Obama的泳池派对上，我们得到了一个图，标示了人物和事件主题正确的节点，但猜错了时序信息。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="card">
+      <div class="tag-row"><span class="tag gray">Drop</span></div>
+      <h2 style="margin-top: 10px;">Drop</h2>
+      <p class="lead">Removes redundant repetition without changing the intended information.</p>
+      <div class="example-card" style="margin-top: 18px;">
+        <p><span class="label">Source:</span>These are the morphology level, these are the morphology level embeddings.</p>
+        <div class="lang-grid">
+          <div class="lang-box">
+            <h3>English → German</h3>
+            <p><span class="label">Reference:</span>Das hier ist die morphologische Ebene, das hier sind die Einbettungen auf der morphologischen Ebene.</p>
+            <p><span class="label">Drop:</span>Das hier sind die Einbettungen auf der morphologischen Ebene.</p>
+          </div>
+          <div class="lang-box">
+            <h3>English → Chinese</h3>
+            <p><span class="label">Reference:</span>这些是形态学层面的，这些是形态学层面的嵌入。</p>
+            <p><span class="label">Drop:</span>这些是形态层面的嵌入。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="card">
+      <div class="tag-row"><span class="tag purple">Partial_Summarization</span></div>
+      <h2 style="margin-top: 10px;">Partial_Summarization</h2>
+      <p class="lead">Compresses equivalent or repetitive expressions while preserving meaning.</p>
+      <div class="example-card" style="margin-top: 18px;">
+        <p><span class="label">Source:</span>And here you have the number of spans that were labeled as English and the spans that were labeled as other borrowings and how many of them were unique.</p>
+        <div class="lang-grid">
+          <div class="lang-box">
+            <h3>English → German</h3>
+            <p><span class="label">Reference:</span>Und hier sehen Sie die Anzahl der Segmente, die als Englisch gekennzeichnet wurden, und der Segmente, die als andere Entlehnungen gekennzeichnet wurden, sowie wie viele von ihnen einzigartig waren.</p>
+            <p><span class="label">Partial_Summarization:</span>Und hier sehen Sie, wie viele Segmente als Englisch oder als andere Entlehnung gekennzeichnet wurden und wie viele davon einzigartig sind.</p>
+          </div>
+          <div class="lang-box">
+            <h3>English → Chinese</h3>
+            <p><span class="label">Reference:</span>这包含了被标记为英语的跨度数量和标记为其他借词的跨度数量，以及它们中有多少是独一无二的。</p>
+            <p><span class="label">Partial_Summarization:</span>这包含了被标记为英语和其他借用词的跨度，以及其中有多少是唯一的。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="card">
+      <div class="tag-row"><span class="tag green">Pronominalization</span></div>
+      <h2 style="margin-top: 10px;">Pronominalization</h2>
+      <p class="lead">Replaces a repeated noun phrase with a pronoun when the referent is clear.</p>
+      <div class="example-card" style="margin-top: 18px;">
+        <p><span class="label">Source:</span>Lexical borrowing is a type of linguistic borrowing um which is basically reproducing in one language patterns of other languages. There are however some differences between lexical borrowing and code-switching.</p>
+        <div class="lang-grid">
+          <div class="lang-box">
+            <h3>English → German</h3>
+            <p><span class="label">Reference:</span>Lexikalische Entlehnung ist eine Form der sprachlichen Entlehnung, die im Grunde darin besteht, in einer Sprache Muster anderer Sprachen zu reproduzieren. Es gibt jedoch einige Unterschiede zwischen lexikalischer Entlehnung und Code-Switching.</p>
+            <p><span class="label">Pronominalization:</span>Lexikalische Entlehnung ist eine Form der sprachlichen Entlehnung, die im Grunde darin besteht, in einer Sprache Muster anderer Sprachen zu reproduzieren. Es gibt jedoch einige Unterschiede zwischen ihr und dem Code-Switching.</p>
+          </div>
+          <div class="lang-box">
+            <h3>English → Chinese</h3>
+            <p><span class="label">Reference:</span>词汇借用是一种语言借用，它基本上是在一种语言中再现其他语言的模式。不过，词汇借用和语码转换之间还是有一些区别。</p>
+            <p><span class="label">Pronominalization:</span>词汇借用是一种语言借用，本质上是在一种语言中再现其他语言的模式。然而，它和语码转换之间存在一些差异。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Action-based Simultaneous Machine Interpretation · Project page for ACL 2026
+  </footer>
+</body>
+</html>

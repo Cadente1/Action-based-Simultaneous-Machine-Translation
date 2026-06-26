@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prompt Examples</title>
+  <style>
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --navy: #0f172a;
+  --blue: #2563eb;
+  --cyan: #0891b2;
+  --green: #16a34a;
+  --orange: #ea580c;
+  --purple: #7c3aed;
+  --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+  --radius: 18px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 32rem),
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.10), transparent 28rem),
+    var(--bg);
+  line-height: 1.65;
+}
+a { color: var(--blue); }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(16px);
+  background: rgba(248, 250, 252, 0.84);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+}
+.topbar-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 12px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.brand {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+  white-space: nowrap;
+}
+.nav {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  font-size: 0.94rem;
+}
+.nav a {
+  color: #334155;
+  text-decoration: none;
+  font-weight: 600;
+}
+.nav a:hover { color: var(--blue); }
+.hero {
+  color: white;
+  background:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 64, 175, 0.92)),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.40), transparent 28rem);
+  padding: 58px 24px 48px;
+}
+.hero-inner { max-width: 1160px; margin: 0 auto; }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #dbeafe;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+h1 {
+  margin: 0;
+  font-size: clamp(2.1rem, 4vw, 3.9rem);
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+}
+.subtitle {
+  max-width: 900px;
+  margin: 18px 0 0;
+  font-size: clamp(1.02rem, 2vw, 1.22rem);
+  color: #dbeafe;
+  line-height: 1.55;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border-radius: 11px;
+  text-decoration: none;
+  font-weight: 800;
+  border: 1px solid transparent;
+}
+.btn.primary { background: white; color: #1e3a8a; }
+.btn.secondary { background: rgba(255, 255, 255, 0.10); color: white; border-color: rgba(255, 255, 255, 0.25); }
+main {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 38px 22px 74px;
+}
+section { margin-bottom: 28px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 30px;
+}
+h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: clamp(1.48rem, 2.8vw, 2.05rem);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+h3 {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-size: 1.13rem;
+  line-height: 1.3;
+}
+.lead {
+  margin: 12px 0 0;
+  color: #475569;
+  font-size: 1.04rem;
+  max-width: 920px;
+}
+.muted { color: var(--muted); }
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+.example-card, .prompt-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  background: #ffffff;
+}
+.example-card { background: #f8fafc; }
+.lang-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.lang-box {
+  border: 1px solid #dbeafe;
+  background: #f8fbff;
+  border-radius: 14px;
+  padding: 14px;
+}
+.label {
+  display: inline-block;
+  font-weight: 900;
+  color: var(--navy);
+  margin-right: 8px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-weight: 800;
+  font-size: 0.82rem;
+  border: 1px solid transparent;
+}
+.tag.gray { color: #475569; background: #e2e8f0; border-color: #cbd5e1; }
+.tag.orange { color: #c2410c; background: #ffedd5; border-color: #fed7aa; }
+.tag.purple { color: #6d28d9; background: #ede9fe; border-color: #ddd6fe; }
+.tag.green { color: #15803d; background: #dcfce7; border-color: #bbf7d0; }
+.tag.blue { color: #1d4ed8; background: #dbeafe; border-color: #bfdbfe; }
+pre {
+  margin: 14px 0 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border-radius: 16px;
+  padding: 18px;
+  background: #0f172a;
+  color: #e2e8f0;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+footer {
+  padding: 34px 22px;
+  text-align: center;
+  color: #64748b;
+  border-top: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.72);
+}
+@media (max-width: 900px) {
+  .grid-2, .lang-grid { grid-template-columns: 1fr; }
+  .nav { display: none; }
+}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Action-based SiMT</div>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#actions">Actions</a>
+        <a href="index.html#framework">Framework</a>
+        <a href="index.html#results">Results</a>
+        <a href="prompt_examples.html">Prompt examples</a>
+      </nav>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Project Examples</div>
+      <h1>Prompt Examples</h1>
+      <p class="subtitle">Action-aware, prefix-feeding, and few-shot prompt templates used in the LLM-based inference setting.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="index.html">Back to project page</a>
+        <a class="btn secondary" href="https://github.com/Cadente1/Action-based-Simultaneous-Machine-Translation">Code</a>
+        <a class="btn secondary" href="https://arxiv.org/abs/2601.11002">Paper</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="card">
+      <h2>Prompt examples from the appendix</h2>
+      <p class="lead">
+        These prompt templates show how the model is instructed to choose actions, use action-level statistics, and produce simultaneous-interpretation-style translations.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Main action-aware prompt</h2>
+      <p class="lead">
+        This prompt gives the LLM the available actions and the development-set BLEU / LAAL statistics, then asks it to select actions according to the quality-latency trade-off.
+      </p>
+      <pre><code>You are a simultaneous translation (En-Zh) agent. Your task is to read a source sentence word by word, and decide what action to take at each step to optimize the balance between translation quality and latency. Keep to the original meaning and word order of the sentence when doing translation.
+
+You can choose from the following actions:
+- READ: Wait for the next source word (default).
+- WRITE: Output a target word or phrase.
+- Drop: Remove previously read word(s) if they are meaningless fillers (e.g., “uh”, “um”), repetitions, false starts, or self-corrections. Use only when clearly justified.
+- Partial_Summarization: Merge or simplify redundant or equivalent expressions, while preserving the meaning and tone.
+- Cut: Intentionally split the sentence into two shorter, independently translatable units. Use only when the sentence is long or syntactically complex.
+- PRONOUN: Replace a repeated noun phrase with a pronoun ONLY IF the referent is unambiguous.
+
+Keep to the original word order and meaning, and use the new actions only if they considerably improve the latency or quality of interpretation.
+
+Based on dev set evaluation:
+- Drop → AL ≈ 0.851s, BLEU ≈ 58.94
+- Partial_Summarization → AL ≈ 0.847s, BLEU ≈ 60.33
+- Cut → AL ≈ 0.824s, BLEU ≈ 60.28
+- PRONOUN → AL ≈ 0.858s, BLEU ≈ 60.85
+
+Only use Drop, Partial_Summarization, or Cut if they reduce latency without hurting translation quality.
+
+You will receive the full source sentence. Your job is:
+1. Simulate the step-by-step translation process internally.
+2. Carefully choose the action to take at each step strictly based on the statistics provided above.
+3. Output the action sequence, explanation of each action, and the full translation of the sentence.
+
+Source sentence:
+{input sentence}</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>Prefix-feeding sanity-check prompt</h2>
+      <p class="lead">
+        This version is used to verify that incremental decisions can be made from the visible prefix without relying on future source tokens.
+      </p>
+      <pre><code>You are a simultaneous translation (En-Zh) agent. Your task is to read a source sentence word by word, and decide what action to take at each step to optimize the balance between translation quality and latency.
+
+You will receive a word at one time.
+
+Your job is:
+1. Simulate the step-by-step translation process internally.
+2. Carefully choose the action to take at each step strictly based on the statistics provided above.
+3. At each step, output the action you chose and the incremental translation. If you choose READ or another action that does not yield a translation, do not output a translation; just give the action.
+4. When given the complete sentence, output the whole sentence based on previous incremental translations.
+5. You are not allowed to modify or overwrite your previous output; only incremental translations are allowed.</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>Few-shot prompting baseline</h2>
+      <p class="lead">
+        This is the few-shot baseline template, where demonstrations are inserted before the user sentence.
+      </p>
+      <pre><code>[System]
+You are a professional English-to-(tgt lang) simultaneous interpreter.
+Translate the given English sentence into Chinese.
+Do not output any thinking steps, only output the final result.
+Output only JSON:
+{&quot;source&quot;: &quot;...&quot;, &quot;translation&quot;: &quot;...&quot;}.
+
+{FEW_SHOT_EXAMPLES}
+
+[User]
+Sentence:
+{SOURCE_SENTENCE}</code></pre>
+    </section>
+
+  </main>
+
+  <footer>
+    Action-based Simultaneous Machine Interpretation · Project page for ACL 2026
+  </footer>
+</body>
+</html>
