@@ -331,6 +331,15 @@
       box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
     }
 
+    .figure-frame {
+      width: 100%;
+      height: 520px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: white;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+    }
+
     .track-label {
       display: inline-block;
       margin-bottom: 12px;
@@ -480,6 +489,7 @@
       }
 
       .nav { display: none; }
+      .figure-frame { height: 360px; }
     }
   </style>
 </head>
@@ -581,12 +591,10 @@
       </div>
 
       <div style="margin-top: 22px;">
-        <!-- Replace this placeholder with your figure:
-             <img class="figure" src="assets/action_space.png" alt="Proposed action space"> -->
-        <div class="figure-placeholder">
-          <strong>Action-space figure placeholder</strong>
-          <span>Put your proposed-action table or diagram at <code>docs/assets/action_space.png</code>.</span>
-        </div>
+        <iframe class="figure-frame" src="assets/Action_examples.pdf#toolbar=0&navpanes=0" title="Action examples"></iframe>
+        <p class="muted" style="margin-top: 8px;">
+          <a href="assets/Action_examples.pdf">Open action examples PDF</a>
+        </p>
       </div>
     </section>
 
@@ -599,12 +607,10 @@
       </p>
 
       <div style="margin: 22px 0;">
-        <!-- Replace this placeholder with your figure:
-             <img class="figure" src="assets/method_overview.png" alt="Method overview"> -->
-        <div class="figure-placeholder">
-          <strong>Method-overview figure placeholder</strong>
-          <span>Put your framework image at <code>docs/assets/method_overview.png</code>.</span>
-        </div>
+        <iframe class="figure-frame" src="assets/Method_overview.pdf#toolbar=0&navpanes=0" title="Method overview"></iframe>
+        <p class="muted" style="margin-top: 8px;">
+          <a href="assets/Method_overview.pdf">Open method overview PDF</a>
+        </p>
       </div>
 
       <div class="grid-2">
@@ -653,12 +659,10 @@
       </div>
 
       <div style="margin-top: 22px;">
-        <!-- Replace this placeholder with your figure:
-             <img class="figure" src="assets/track_b_system.png" alt="Track B system"> -->
-        <div class="figure-placeholder">
-          <strong>Track-B system figure placeholder</strong>
-          <span>Put your step-wise inference diagram at <code>docs/assets/track_b_system.png</code>.</span>
-        </div>
+        <iframe class="figure-frame" src="assets/Stepwise_inference.pdf#toolbar=0&navpanes=0" title="Step-wise inference"></iframe>
+        <p class="muted" style="margin-top: 8px;">
+          <a href="assets/Stepwise_inference.pdf">Open step-wise inference PDF</a>
+        </p>
       </div>
     </section>
 
